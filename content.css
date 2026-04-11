@@ -1,0 +1,62 @@
+/* Plain Text Formatter for Frame.io
+   Buttons styled to match Frame.io's existing comment toolbar icons. */
+
+.pf-frameio-btn {
+  /* Match the existing icon wrapper footprint: 32px wide, 24px tall.
+     The parent flex container provides 4px gap between siblings, so we
+     don't need our own margins. align-self centers our shorter buttons
+     vertically within the row instead of stretching to row height. */
+  width: 32px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+  align-self: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #b4b4be;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  transition: background 0.15s ease, color 0.15s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.pf-frameio-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.pf-frameio-btn:active {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.pf-frameio-btn.pf-italic {
+  font-style: italic;
+}
+
+.pf-frameio-btn.pf-strike {
+  text-decoration: line-through;
+}
+
+.pf-frameio-btn.pf-under {
+  text-decoration: underline;
+}
+
+.pf-frameio-sep {
+  display: inline-block;
+  width: 1px;
+  height: 16px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.16);
+  margin: 4px 4px;
+  align-self: center;
+}
