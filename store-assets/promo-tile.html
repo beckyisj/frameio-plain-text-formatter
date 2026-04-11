@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Manrope', -apple-system, sans-serif;
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* === Small promo tile: 440x280 === */
+    .small-tile {
+      width: 440px;
+      height: 280px;
+      background: linear-gradient(135deg, #fafaf9 0%, #f0efed 100%);
+      padding: 32px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .small-tile::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #0d9488, #14b8a6, #2dd4bf);
+    }
+    .small-tile .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .small-tile .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #0d9488, #14b8a6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .small-tile .brand-icon svg { width: 14px; height: 14px; }
+    .small-tile .brand-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #78716c;
+      letter-spacing: -0.2px;
+    }
+    .small-tile h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1c1917;
+      letter-spacing: -1px;
+      line-height: 1.05;
+    }
+    .small-tile h1 .accent { color: #0d9488; }
+    .small-tile .meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #78716c;
+    }
+    .small-tile .meta .dot { color: #d6d3d1; }
+    .small-tile .toolbar-preview {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1c1917;
+      padding: 8px 12px;
+      border-radius: 8px;
+      align-self: flex-start;
+    }
+    .small-tile .toolbar-preview .btn {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #d4d4d8;
+    }
+    .small-tile .toolbar-preview .b { font-weight: 700; }
+    .small-tile .toolbar-preview .i { font-style: italic; }
+    .small-tile .toolbar-preview .s { text-decoration: line-through; }
+    .small-tile .toolbar-preview .u { text-decoration: underline; }
+
+    /* === Marquee: 1400x560 === */
+    .marquee {
+      width: 1400px;
+      height: 560px;
+      background: linear-gradient(135deg, #fafaf9 0%, #f0efed 100%);
+      padding: 64px 80px;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 40px;
+    }
+    .marquee::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #0d9488, #14b8a6, #2dd4bf);
+    }
+    .marquee::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -200px;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .marquee .left { position: relative; z-index: 1; }
+    .marquee .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .marquee .brand-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #0d9488, #14b8a6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .marquee .brand-icon svg { width: 22px; height: 22px; }
+    .marquee .brand-name {
+      font-size: 22px;
+      font-weight: 600;
+      color: #78716c;
+      letter-spacing: -0.3px;
+    }
+    .marquee h1 {
+      font-size: 64px;
+      font-weight: 800;
+      color: #1c1917;
+      letter-spacing: -2.5px;
+      line-height: 0.98;
+      margin-bottom: 24px;
+      text-wrap: balance;
+    }
+    .marquee h1 .accent { color: #0d9488; }
+    .marquee .desc {
+      font-size: 22px;
+      font-weight: 400;
+      color: #78716c;
+      line-height: 1.45;
+      max-width: 540px;
+      letter-spacing: -0.3px;
+    }
+
+    /* Right side: Frame.io comment mockup */
+    .marquee .mockup {
+      background: #1c1917;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+      position: relative;
+      z-index: 1;
+    }
+    .marquee .mockup-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #78716c;
+      margin-bottom: 14px;
+    }
+    .marquee .mockup-time {
+      display: inline-block;
+      background: rgba(217, 119, 6, 0.18);
+      color: #fbbf24;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 12px;
+      font-weight: 600;
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+    .marquee .mockup-text {
+      display: inline;
+      font-size: 19px;
+      color: #fafaf9;
+      line-height: 1.5;
+      vertical-align: middle;
+    }
+    .marquee .mockup-toolbar {
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px solid #292524;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .marquee .mockup-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #b4b4be;
+      font-size: 16px;
+    }
+    .marquee .mockup-sep {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.16);
+      margin: 0 6px;
+    }
+    .marquee .mockup-fmt-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fafaf9;
+      background: rgba(13, 148, 136, 0.18);
+    }
+    .marquee .mockup-fmt-btn.b { font-weight: 800; }
+    .marquee .mockup-fmt-btn.i { font-style: italic; }
+    .marquee .mockup-fmt-btn.s { text-decoration: line-through; }
+    .marquee .mockup-fmt-btn.u { text-decoration: underline; }
+
+    /* === Close-up screenshot: 1280x800 === */
+    .closeup {
+      width: 1280px;
+      height: 800px;
+      background: linear-gradient(135deg, #fafaf9 0%, #f0efed 100%);
+      padding: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 40px;
+    }
+    .closeup::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #0d9488, #14b8a6, #2dd4bf);
+    }
+    .closeup .label {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #0d9488;
+      margin-bottom: 16px;
+    }
+    .closeup h1 {
+      font-size: 56px;
+      font-weight: 700;
+      color: #1c1917;
+      letter-spacing: -1.8px;
+      line-height: 1.05;
+      text-align: center;
+      margin-bottom: 16px;
+      text-wrap: balance;
+    }
+    .closeup .sub {
+      font-size: 22px;
+      font-weight: 400;
+      color: #78716c;
+      letter-spacing: -0.2px;
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .closeup .frame-mockup {
+      background: #1c1917;
+      border-radius: 16px;
+      padding: 28px 32px;
+      width: 760px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.2);
+    }
+    .closeup .frame-mockup .timecode {
+      display: inline-block;
+      background: rgba(217, 119, 6, 0.18);
+      color: #fbbf24;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 14px;
+      font-weight: 600;
+      margin-right: 14px;
+      vertical-align: middle;
+    }
+    .closeup .frame-mockup .text {
+      display: inline;
+      font-size: 22px;
+      color: #fafaf9;
+      vertical-align: middle;
+    }
+    .closeup .frame-mockup .toolbar {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid #292524;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .closeup .frame-mockup .icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #b4b4be;
+    }
+    .closeup .frame-mockup .icon svg { width: 18px; height: 18px; }
+    .closeup .frame-mockup .sep {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.18);
+      margin: 0 8px;
+    }
+    .closeup .frame-mockup .fmt {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fafaf9;
+      background: rgba(13, 148, 136, 0.22);
+    }
+    .closeup .frame-mockup .fmt.i { font-style: italic; }
+    .closeup .frame-mockup .fmt.s { text-decoration: line-through; }
+    .closeup .frame-mockup .fmt.u { text-decoration: underline; }
+    .closeup .frame-mockup .arrow-pointer {
+      position: relative;
+      margin-top: 36px;
+      display: flex;
+      justify-content: center;
+    }
+    .closeup .frame-mockup .arrow-pointer .label {
+      background: #0d9488;
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 100px;
+      letter-spacing: 0;
+      text-transform: none;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Small promo tile (440x280) -->
+  <div class="small-tile" id="small-tile">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 32 32" fill="none"><path d="M11.7 9.2 L11.7 22.8 L22.2 16 Z" fill="white"/></svg>
+      </div>
+      <div class="brand-name">YouTube Producer</div>
+    </div>
+    <h1>Plain Text Formatter for <span class="accent">Frame.io</span></h1>
+    <div class="toolbar-preview">
+      <div class="btn b">B</div>
+      <div class="btn i">I</div>
+      <div class="btn s">S</div>
+      <div class="btn u">U</div>
+    </div>
+  </div>
+
+  <!-- Marquee (1400x560) -->
+  <div class="marquee" id="marquee">
+    <div class="left">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M11.7 9.2 L11.7 22.8 L22.2 16 Z" fill="white"/></svg>
+        </div>
+        <div class="brand-name">YouTube Producer</div>
+      </div>
+      <h1>Bold, italic, and strikethrough <span class="accent">in Frame.io comments</span>.</h1>
+      <p class="desc">A Chrome extension that adds formatting buttons right inside Frame.io's comment toolbar. Powered by Unicode characters that paste anywhere.</p>
+    </div>
+    <div class="mockup">
+      <div class="mockup-label">Comment</div>
+      <div>
+        <span class="mockup-time">00:00:08:20</span>
+        <span class="mockup-text">This needs to be 𝐛𝐨𝐥𝐝𝐞𝐫 and the t̶i̶m̶i̶n̶g̶ feels 𝘰𝘧𝘧</span>
+      </div>
+      <div class="mockup-toolbar">
+        <div class="mockup-icon">⏱</div>
+        <div class="mockup-icon">📎</div>
+        <div class="mockup-icon">😊</div>
+        <div class="mockup-icon">✏️</div>
+        <div class="mockup-sep"></div>
+        <div class="mockup-fmt-btn b">B</div>
+        <div class="mockup-fmt-btn i">I</div>
+        <div class="mockup-fmt-btn s">S</div>
+        <div class="mockup-fmt-btn u">U</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Close-up screenshot (1280x800) -->
+  <div class="closeup" id="closeup">
+    <div class="label">Chrome Extension</div>
+    <h1>Format text inline in Frame.io</h1>
+    <p class="sub">Bold, italic, strikethrough, and underline — without leaving the comment box.</p>
+    <div class="frame-mockup">
+      <div>
+        <span class="timecode">00:00:08:20</span>
+        <span class="text">This needs to be 𝐛𝐨𝐥𝐝𝐞𝐫 and the t̶i̶m̶i̶n̶g̶ feels 𝘰𝘧𝘧</span>
+      </div>
+      <div class="toolbar">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg></div>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+        <div class="sep"></div>
+        <div class="fmt b">B</div>
+        <div class="fmt i">I</div>
+        <div class="fmt s">S</div>
+        <div class="fmt u">U</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
